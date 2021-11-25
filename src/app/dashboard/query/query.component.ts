@@ -12,4 +12,8 @@ export class QueryComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  onInputChange(event: any) {
+    let query = event.target.value;
+    console.log(query);
+  }
 }

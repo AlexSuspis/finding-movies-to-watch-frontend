@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./results-list.component.css']
 })
 export class ResultsListComponent implements OnInit {
+  results = ['Saving Private Ryan', 'Fury', 'Dunkirk'];
 
   constructor() { }
 
