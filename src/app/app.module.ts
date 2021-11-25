@@ -10,6 +10,7 @@ import { QueryPreferencesComponent } from './dashboard/query/query-preferences/q
 import { ViewPreferencesComponent } from './dashboard/results-list/view-preferences/view-preferences.component';
 import { UserAccountComponent } from './dashboard/user-account/user-account.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { LoginRegisterComponent } from './login-register/login-register.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     QueryPreferencesComponent,
     ViewPreferencesComponent,
     UserAccountComponent,
-    DashboardComponent
+    DashboardComponent,
+    LoginRegisterComponent
   ],
   imports: [
     BrowserModule,
