@@ -8,13 +8,13 @@
     </div>
     <div class="row">
         <div class="col-xs-6">
-            <app-query></app-query>
+            <app-query (resultsReceivedEvent)="onReceiveQueryResults($event)"></app-query>
             <app-query-preferences></app-query-preferences>
         </div>
     </div>
     <div class="row">
         <div class="col-xs-6">
-            <app-results-list></app-results-list>
+            <app-results-list [results]="query_results"></app-results-list>
         </div>
     </div>
 </div>

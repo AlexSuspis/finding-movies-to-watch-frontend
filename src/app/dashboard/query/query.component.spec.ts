@@ -23,6 +23,9 @@ describe('QueryComponent', () => {
     expect(component).toBeTruthy();
   });
 
+  describe('First time using app, no previous searches', () => {
+    it('should perform an API call to GET /recommendations to get a set of recommended movies and populate results-list with them', () => { })
+  })
   describe('Each time user changes the text in input element', () => {
 
     it('should trigger an input event', () => {
@@ -40,9 +43,13 @@ describe('QueryComponent', () => {
     });
     it('should trigger an API call to /GET results with input text as payload', () => { });
 
-    describe('When a set of results is received from /GET results', () => {
+    describe('When a non-empty set of results is received from /GET results', () => {
       it('should delete all results currently stored in the results list in results-list component', () => { });
       it('should push the received query results onto a results list in results-list component', () => { });
     });
+    describe('When an empty set of results is received from /GET results', () => {
+      it('display "Query not found" message in results-list component', () => { })
+
+    })
   });
 });

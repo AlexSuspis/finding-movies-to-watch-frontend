@@ -6,10 +6,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
+  query_results = [];
 
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  onReceiveQueryResults(event: any) {
+    this.query_results = event
+  }
 }
