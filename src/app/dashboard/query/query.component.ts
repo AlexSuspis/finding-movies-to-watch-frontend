@@ -15,5 +15,9 @@ export class QueryComponent implements OnInit {
   onInputChange(event: any) {
     let query = event.target.value;
     console.log(query);
+
+    //API call GET /results_from_query
+
+    //push received results onto results-list 
   }
 }

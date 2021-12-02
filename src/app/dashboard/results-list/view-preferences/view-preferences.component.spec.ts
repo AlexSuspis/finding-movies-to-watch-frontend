@@ -8,9 +8,9 @@ describe('ViewPreferencesComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ViewPreferencesComponent ]
+      declarations: [ViewPreferencesComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {
@@ -21,5 +21,12 @@ describe('ViewPreferencesComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  describe('When user clicks "Sort by Name"', () => {
+    it('should trigger a sortResultsbyName() event', () => { });
+    it('should send an API call to /POST /user/sortPreferences', () => { });
+
+    it('should display the HTML results elements ordered by their name');
   });
 });
