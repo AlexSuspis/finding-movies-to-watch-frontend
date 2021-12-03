@@ -11,6 +11,8 @@ import { ViewPreferencesComponent } from './dashboard/results-list/view-preferen
 import { UserAccountComponent } from './dashboard/user-account/user-account.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { LoginRegisterComponent } from './login-register/login-register.component';
+import { ChangeDetailsFormComponent } from './dashboard/user-account/change-details-form/change-details-form.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -22,11 +24,13 @@ import { LoginRegisterComponent } from './login-register/login-register.componen
     ViewPreferencesComponent,
     UserAccountComponent,
     DashboardComponent,
-    LoginRegisterComponent
+    LoginRegisterComponent,
+    ChangeDetailsFormComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
