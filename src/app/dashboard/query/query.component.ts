@@ -1,4 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { mock_results } from '../results-list/result.model';
+import { Result } from '../results-list/result.model';
 
 @Component({
   selector: 'app-query',
@@ -6,15 +8,8 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./query.component.css']
 })
 export class QueryComponent implements OnInit {
-  mock_received_results = [
-    'Boy in the striped pyjamas',
-    'Pulp Fiction',
-    'La vie est Belle',
-    'Shawshank Redemption',
-    'The Godfather',
-    'Queen\'s Gambit'
-  ]
-  @Output() resultsReceivedEvent = new EventEmitter<string[]>();
+  mock_results = mock_results;
+  @Output() resultsReceivedEvent = new EventEmitter<Result[]>();
   constructor() { }
 
   ngOnInit(): void {
@@ -24,14 +19,14 @@ export class QueryComponent implements OnInit {
     let query = event.target.value;
     if (!query) {
       console.log('<no query>')
-      this.resultsReceivedEvent.emit([])
+      this.resultsReceivedEvent.emit([]);
       return
     } else {
       console.log(query)
 
-      let random_mock_result1 = this.mock_received_results[Math.floor(Math.random() * this.mock_received_results.length)]
-      let random_mock_result2 = this.mock_received_results[Math.floor(Math.random() * this.mock_received_results.length)]
-      let results = [random_mock_result1, random_mock_result2]
+      let result1 = this.mock_results[Math.floor(Math.random() * this.mock_results.length)]
+      let result2 = this.mock_results[Math.floor(Math.random() * this.mock_results.length)]
+      let results = [result1, result2]
       this.resultsReceivedEvent.emit(results)
     }
 

@@ -17,6 +17,7 @@ export class DashboardComponent implements OnInit {
     if (results.length == 0) {
       this.query_results = [];
     } else
-      this.query_results = results
+      console.log(results)
+    this.query_results = results
   }
 }

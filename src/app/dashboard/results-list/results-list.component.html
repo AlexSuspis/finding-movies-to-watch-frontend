@@ -1,6 +1,13 @@
-<div *ngIf="results.length == 0; else showResults">There are no results</div>
+<div *ngIf="results.length != 0; else noResults">
+    <div class="container">
+        <app-view-preferences></app-view-preferences>
+        <!-- <app-result *ngFor="let result of results" [name]="result"></app-result> -->
+        <div class="row" *ngFor="let result of results">
+            {{result['name']}}
+        </div>
+    </div>
+</div>
 
-<ng-template #showResults>
-    <app-view-preferences></app-view-preferences>
-    <app-result *ngFor="let result of results" [name]="result"></app-result>
+<ng-template #noResults>
+    There are no results
 </ng-template>

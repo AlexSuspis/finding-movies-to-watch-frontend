@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Result } from '../result.model';
 
 @Component({
   selector: 'app-result',
@@ -8,7 +9,9 @@ import { Component, OnInit, Input } from '@angular/core';
 export class ResultComponent implements OnInit {
   @Input() name = '';
 
-  constructor() { }
+  constructor(result: Result) {
+
+  }
 
   ngOnInit(): void {
   }
