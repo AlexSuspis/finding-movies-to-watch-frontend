@@ -6,7 +6,6 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./query-preferences.component.css']
 })
 export class QueryPreferencesComponent implements OnInit {
-
   constructor() { }
 
   ngOnInit(): void {
