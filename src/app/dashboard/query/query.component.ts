@@ -22,13 +22,18 @@ export class QueryComponent implements OnInit {
 
   onInputChange(event: any) {
     let query = event.target.value;
-    console.log(query);
+    if (!query) {
+      console.log('<no query>')
+      this.resultsReceivedEvent.emit([])
+      return
+    } else {
+      console.log(query)
 
-    let random_mock_result1 = this.mock_received_results[Math.floor(Math.random() * this.mock_received_results.length)]
-    let random_mock_result2 = this.mock_received_results[Math.floor(Math.random() * this.mock_received_results.length)]
-    let results = [random_mock_result1, random_mock_result2]
-    this.resultsReceivedEvent.emit(results)
-
+      let random_mock_result1 = this.mock_received_results[Math.floor(Math.random() * this.mock_received_results.length)]
+      let random_mock_result2 = this.mock_received_results[Math.floor(Math.random() * this.mock_received_results.length)]
+      let results = [random_mock_result1, random_mock_result2]
+      this.resultsReceivedEvent.emit(results)
+    }
 
     //API call GET /results_from_query
 
