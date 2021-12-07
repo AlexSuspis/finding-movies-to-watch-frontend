@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
   query_results = [];
+  firstRender = true;
 
   constructor() { }
 
