@@ -7,6 +7,7 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class ResultsListComponent implements OnInit {
   @Input() results = [];
+  showResults: Boolean = false;
 
   constructor() { }
 

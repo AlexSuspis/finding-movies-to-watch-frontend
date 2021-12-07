@@ -13,7 +13,7 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onReceiveQueryResults(results: any) {
+  onResultsReceived(results: any) {
     if (results.length == 0) {
       this.query_results = [];
     } else
