@@ -11,7 +11,7 @@ import { Result } from '../results-list/result.model';
 export class QueryComponent implements OnInit {
   mock_results = mock_results;
   @Output() resultsReceivedEvent = new EventEmitter<Result[]>();
-  @Output() noResultsReceivedEvent = new EventEmitter();
+  @Output() inputEmptiedEvent = new EventEmitter();
   constructor() { }
 
   ngOnInit(): void {
@@ -21,14 +21,14 @@ export class QueryComponent implements OnInit {
     let query = event.target.value;
     if (!query) {
       console.log('empty query')
-      this.resultsReceivedEvent.emit([]);
+      this.inputEmptiedEvent.emit();
       return
     } else {
       console.log(query)
 
       //mock case for when no results are found with given query
       if (query.length > 5) {
-        this.noResultsReceivedEvent.emit();
+        this.resultsReceivedEvent.emit([]);
         return
       }
 

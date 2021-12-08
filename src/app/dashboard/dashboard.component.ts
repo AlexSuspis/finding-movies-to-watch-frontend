@@ -6,8 +6,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-  query_results = [];
-  firstRender = true;
+  queryResults = [];
+  renderRecommendations = true;
+  noQueryResults = false;
 
   constructor() { }
 
@@ -15,10 +16,16 @@ export class DashboardComponent implements OnInit {
   }
 
   onResultsReceived(results: any) {
+    this.renderRecommendations = false;
     if (results.length == 0) {
-      this.query_results = [];
+      this.queryResults = [];
     } else
       console.log(results)
-    this.query_results = results
+    this.queryResults = results
+  }
+
+  onInputEmptied() {
+    this.renderRecommendations = true;
+    console.log('renderRecommendations set to true');
   }
 }
