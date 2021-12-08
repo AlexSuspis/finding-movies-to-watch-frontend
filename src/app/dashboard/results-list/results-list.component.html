@@ -2,7 +2,17 @@
     <!-- <div> -->
     <app-view-preferences></app-view-preferences>
     <div class="row bg-info" *ngFor="let result of results">
-        {{result['name']}}
+        <div class="card">
+            <div class="card-title">
+            </div>
+            <!-- <div class="card-body"> -->
+            <div class="row">
+                <div class="col-4"><b>{{result['name']}}</b></div>
+                <div class="col-4">{{result['streamingProviders']}}</div>
+                <div class="col-4">{{result['countries']}}</div>
+            </div>
+            <!-- </div> -->
+        </div>
     </div>
 </div>
 
