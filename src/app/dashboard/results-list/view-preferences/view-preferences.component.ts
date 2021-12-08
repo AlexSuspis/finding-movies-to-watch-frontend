@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-view-preferences',
@@ -6,10 +6,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./view-preferences.component.css']
 })
 export class ViewPreferencesComponent implements OnInit {
-
+  @Input() countries = ['USA', 'Portugal', 'France'];
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  onClick() {
+    console.log('Hello World')
   }
 
 }
