@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Result } from './result.model';
 
 @Component({
   selector: 'app-results-list',
@@ -6,11 +7,18 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./results-list.component.css']
 })
 export class ResultsListComponent implements OnInit {
-  @Input() results = [];
+  @Input() results: Result[] = [];
 
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  getSetOfCountries() {
+    var allCountries: String[] = [];
+    this.results.forEach(result => allCountries.push(...result['countries']));
+    let uniqueCountries: Set<String> = new Set(allCountries);
+
+    return Array.from(uniqueCountries)
+  }
 }

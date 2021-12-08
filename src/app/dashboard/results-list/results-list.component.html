@@ -1,6 +1,6 @@
 <div *ngIf="results.length != 0; else noResults">
     <!-- <div> -->
-    <app-view-preferences></app-view-preferences>
+    <app-view-preferences [countries]="getSetOfCountries()"></app-view-preferences>
     <div class="row bg-info" *ngFor="let result of results">
         <div class="card">
             <div class="card-title">

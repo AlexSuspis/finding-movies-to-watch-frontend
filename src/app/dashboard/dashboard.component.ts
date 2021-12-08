@@ -20,8 +20,8 @@ export class DashboardComponent implements OnInit {
     if (results.length == 0) {
       this.queryResults = [];
     } else
-      console.log(results)
-    this.queryResults = results
+      // console.log(results)
+      this.queryResults = results
   }
 
   onInputEmptied() {
