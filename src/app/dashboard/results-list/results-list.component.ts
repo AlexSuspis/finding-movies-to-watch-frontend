@@ -17,8 +17,15 @@ export class ResultsListComponent implements OnInit {
   getSetOfCountries() {
     var allCountries: String[] = [];
     this.results.forEach(result => allCountries.push(...result['countries']));
-    let uniqueCountries: Set<String> = new Set(allCountries);
+    let setOfCountries: Set<String> = new Set(allCountries);
 
-    return Array.from(uniqueCountries)
+    return Array.from(setOfCountries)
+  }
+  getSetOfProviders() {
+    let allProviders: String[] = [];
+    this.results.forEach(result => allProviders.push(...result['streamingProviders']));
+    let setOfProviders: Set<String> = new Set(allProviders);
+
+    return Array.from(setOfProviders);
   }
 }

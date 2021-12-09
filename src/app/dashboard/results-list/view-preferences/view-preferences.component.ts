@@ -6,7 +6,9 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./view-preferences.component.css']
 })
 export class ViewPreferencesComponent implements OnInit {
-  @Input() countries: String[] = ['USA', 'Portugal', 'France'];
+  @Input() countries: String[] = [];
+  @Input() providers: String[] = [];
+
   constructor() { }
 
   ngOnInit(): void {

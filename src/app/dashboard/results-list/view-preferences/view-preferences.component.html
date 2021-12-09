@@ -1,11 +1,29 @@
-<div class="dropdown mb-2">
-    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
-        aria-expanded="false">
-        Countries
-    </button>
-    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-        <li *ngFor="let country of countries">
-            <a class="dropdown-item" (click)="onClick()">{{country}}</a>
-        </li>
-    </ul>
+<div class="row">
+    <div class="col-md-3">
+        <div class="dropdown mb-2">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
+                data-bs-toggle="dropdown" aria-expanded="false">
+                Countries
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                <li *ngFor="let country of countries">
+                    <a class="dropdown-item" (click)="onClick()">{{country}}</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="dropdown mb-2">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
+                data-bs-toggle="dropdown" aria-expanded="false">
+                Providers
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                <li *ngFor="let provider of providers">
+                    <a class="dropdown-item" (click)="onClick()">{{provider}}</a>
+                </li>
+            </ul>
+        </div>
+    </div>
 </div>
