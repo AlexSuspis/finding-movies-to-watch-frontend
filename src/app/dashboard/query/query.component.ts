@@ -1,7 +1,9 @@
+import { HttpClient } from '@angular/common/http';
 import { ThrowStmt } from '@angular/compiler';
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { mock_results } from '../results-list/result.model';
 import { Result } from '../results-list/result.model';
+
 
 @Component({
   selector: 'app-query',
@@ -12,12 +14,14 @@ export class QueryComponent implements OnInit {
   mock_results = mock_results;
   @Output() resultsReceivedEvent = new EventEmitter<Result[]>();
   @Output() inputEmptiedEvent = new EventEmitter();
-  constructor() { }
+
+  constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
   }
 
-  onInputChange(event: any) {
+  async onInputChange(event: any) {
+
     let query = event.target.value;
     if (!query) {
       console.log('empty query')
@@ -26,16 +30,35 @@ export class QueryComponent implements OnInit {
     } else {
       console.log(query)
 
-      //mock case for when no results are found with given query
-      if (query.length > 5) {
-        this.resultsReceivedEvent.emit([]);
-        return
-      }
+      let results: Result[] = [];
 
-      let result1 = this.mock_results[Math.floor(Math.random() * this.mock_results.length)]
-      let result2 = this.mock_results[Math.floor(Math.random() * this.mock_results.length)]
-      let results = [result1, result2]
-      this.resultsReceivedEvent.emit(results)
+      let url = `http://127.0.0.1:8080/matches/${event.target.value}`;
+      await this.http.get(url, { responseType: 'text' })
+        .subscribe(data => {
+          // console.log(data);
+          results = [];
+          let movies_json = JSON.parse(data)
+          console.log(movies_json)
+          for (let movie_json of movies_json) {
+            // console.log(movie_json['title'])
+            let result = new Result(movie_json['title'], movie_json['countries'], 'Test Description', movie_json['providers']);
+            results.push(result)
+            // console.log(movie_json)
+          }
+          console.log(results)
+          this.resultsReceivedEvent.emit(results)
+        }, err => console.log("Error:", err))
+
+      // //mock case for when no results are found with given query
+      // if (query.length > 5) {
+      //   this.resultsReceivedEvent.emit([]);
+      //   return
+      // }
+
+      // let result1 = this.mock_results[Math.floor(Math.random() * this.mock_results.length)]
+      // let result2 = this.mock_results[Math.floor(Math.random() * this.mock_results.length)]
+      // let results = [result1, result2]
+
     }
 
     //API call GET /results_from_query
