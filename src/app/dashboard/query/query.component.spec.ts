@@ -27,6 +27,7 @@ describe('QueryComponent', () => {
   //   it('should perform an API call to GET /recommendations to get a set of recommended movies and populate results-list with them', () => { })
   // })
   describe('Each time user changes the text in input element', () => {
+    //we can send an api request everytime there is an input trigger, but this results in too many 
 
   });
 

@@ -7,7 +7,9 @@
     </div>
     <div class="row bg-warning mt-3">
         <div class="col-xs-6">
-            <app-query (resultsReceivedEvent)="onResultsReceived($event)" (inputEmptiedEvent)="onInputEmptied()">
+            <app-query (resultsReceivedEvent)="onResultsReceived($event)"
+                (recommendationsReceivedEvent)="onRecommendationsReceived($event)"
+                (inputEmptiedEvent)="onInputEmptied()">
             </app-query>
         </div>
     </div>
@@ -17,7 +19,8 @@
             Recommendations
         </div>
         <ng-template #showResults>
-            <app-results-list [results]="queryResults"></app-results-list>
+            <app-results-list [results]="queryResults.concat(recommendationResults)"></app-results-list>
+
         </ng-template>
         <!-- </div> -->
     </div>

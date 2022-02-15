@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Result } from './results-list/result.model';
 
 @Component({
   selector: 'app-dashboard',
@@ -6,7 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-  queryResults = [];
+  queryResults: Result[] = [];
+  recommendationResults: Result[] = [];
   renderRecommendations = true;
   noQueryResults = false;
 
@@ -15,7 +17,10 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onResultsReceived(results: any) {
+  onRecommendationsReceived(results: Result[]) {
+    this.recommendationResults = results
+  }
+  onResultsReceived(results: Result[]) {
     this.renderRecommendations = false;
     if (results.length == 0) {
       this.queryResults = [];

@@ -1,38 +1,38 @@
 import { HttpClient } from '@angular/common/http';
 import { ThrowStmt } from '@angular/compiler';
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { mock_results } from '../results-list/result.model';
 import { Result } from '../results-list/result.model';
-import { debounceTime, distinctUntilChanged, lastValueFrom, of, Subject, switchMap, map } from 'rxjs';
+import { debounceTime, distinctUntilChanged, lastValueFrom, of, Subject, switchMap, map, fromEvent, tap } from 'rxjs';
 
 @Component({
   selector: 'app-query',
   templateUrl: './query.component.html',
   styleUrls: ['./query.component.css']
 })
-export class QueryComponent implements OnInit {
+export class QueryComponent implements AfterViewInit {
   mock_results = mock_results;
   @Output() resultsReceivedEvent = new EventEmitter<Result[]>();
+  @Output() recommendationsReceivedEvent = new EventEmitter<Result[]>();
   @Output() inputEmptiedEvent = new EventEmitter();
+
+  @ViewChild('search') input!: ElementRef;
+
+  //Inspired from:
+  //https://fireflysemantics.medium.com/debouncing-your-angular-search-field-ce6686cf54b3
+  //https://medium.com/aviabird/angular-2-the-new-craze-of-observables-operators-e2b9dcb9330a
+  ngAfterViewInit(): void {
+    fromEvent(this.input.nativeElement, 'input')
+      .pipe(
+        debounceTime(400),
+        distinctUntilChanged(),
+      ).subscribe((event: any) => this.onInputChange(event))
+  }
+
 
   constructor(private http: HttpClient) { }
 
-  private requestSource = new Subject<void>();
-
-  request() {
-    this.requestSource.next();
-  }
-
-  ngOnInit(): void {
-    // this.requestSource.pipe(switchMap(req => this.http.get(query_matching_url, { responseType: 'text' })))
-    //   .subscribe(moviesJSON => {
-    //     let movies = JSON.parse(moviesJSON)
-    //     console.log(movies)
-    //     results.push(...renderResults(movies));
-    //     this.resultsReceivedEvent.emit(results)
-    //   });
-
-  }
+  ngOnInit(): void { }
 
   async onInputChange(event: any) {
 
@@ -44,104 +44,35 @@ export class QueryComponent implements OnInit {
     } else {
       console.log(query)
 
+      let recommendations: Result[] = [];
       let results: Result[] = [];
-      // let movieId_for_recommendation: Number;
 
       try {
-        //fetch movieIds matching query
-
         let query_matching_url = `http://127.0.0.1:8080/matches/${event.target.value}`;
+        this.http.get(query_matching_url, { responseType: 'text' })
+          .subscribe(moviesJSON => {
+            let movies = JSON.parse(moviesJSON)
+            console.log(movies)
 
-        // Heavily inspired by Suresh Kumar Aryia's answer in https://stackoverflow.com/questions/53432096/observables-cancel-previous-http-request-on-new-subscription-call
-        of(query).pipe(
-          debounceTime(400),
-          distinctUntilChanged(),
-          switchMap(() => {
-            return this.http.get(query_matching_url, { responseType: 'text' }).pipe(
-              map((moviesJSON: any) => {
-                return moviesJSON;
-              })
-            )
+            results.push(...renderResults(movies));
+            this.resultsReceivedEvent.emit(results)
+            this.recommendationsReceivedEvent.emit([])
+
+            let movieId_for_recommendation: Number = movies[0].movieId;
+            let recommendations_url = `http://127.0.0.1:8080/recommendations/${movieId_for_recommendation}`;
+            this.http.get(recommendations_url, { responseType: 'text' })
+              .subscribe(moviesJSON => {
+                let movies = JSON.parse(moviesJSON)
+                console.log(movies)
+                recommendations.push(...renderResults(movies));
+                this.recommendationsReceivedEvent.emit(recommendations)
+              });
           })
-        ).subscribe(moviesJSON => {
-          let movies = JSON.parse(moviesJSON)
-          console.log(movies)
-          results.push(...renderResults(movies));
-          this.resultsReceivedEvent.emit(results)
-        });
-
-
-        // this.http.get(query_matching_url, { responseType: 'text' })
-        //   .subscribe(moviesJSON => {
-        //     let movies = JSON.parse(moviesJSON)
-        //     console.log(movies)
-        //     results.push(...renderResults(movies));
-        //     this.resultsReceivedEvent.emit(results)
-
-        //     let movieId_for_recommendation: Number = movies[0].movieId;
-        //     let recommendations_url = `http://127.0.0.1:8080/recommendations/${movieId_for_recommendation}`;
-        //     this.http.get(recommendations_url, { responseType: 'text' })
-        //       .subscribe(moviesJSON => {
-        //         let movies = JSON.parse(moviesJSON)
-        //         console.log(movies)
-        //         results.push(...renderResults(movies));
-        //         this.resultsReceivedEvent.emit(results)
-
-        //       });
-        //   });
-
-
-        // await lastValueFrom(this.http.get(query_matching_url, { responseType: 'text' }))
-        //   .then(movie_data => {
-        //     let movies = JSON.parse(movie_data)
-        //     results.push(...renderResults(movies))
-        //     // console.log(results)
-        //     this.resultsReceivedEvent.emit(results)
-        //     let movieId_for_recommendation: Number = movies[0].movieId;
-        //     return movieId_for_recommendation
-
-        //   }).then(async movieId => {
-        //     console.log(movieId)
-        //     let recommendations_url = `http://127.0.0.1:8080/recommendations/${movieId}`;
-        //     await lastValueFrom(this.http.get(recommendations_url, { responseType: 'text' }))
-        //       .then(data => {
-        //         let recommended_movies = JSON.parse(data)
-        //         results.push(...renderResults(recommended_movies))
-        //         this.resultsReceivedEvent.emit(results)
-        //       })
-        //   })
-        //   .catch(err => console.log('err!: ', err))
-
-        // console.log(results)
 
         console.log('Resulst received event emitted!')
       } catch (err) {
         console.log("error!: ", err)
       }
-
-
-      // let query_matching_url = `http://127.0.0.1:8080/matches/${event.target.value}`;
-      // // let url = `http://127.0.0.1:8080/recommendations/2640`;
-      // await this.http.get(query_matching_url, { responseType: 'text' })
-      //   .subscribe(data => {
-      //     let movie_objects = JSON.parse(data)
-      //     console.log(movie_objects)
-
-      //     let results: Result[] = []
-      //     results = renderResults(movie_objects);
-      //     console.log(results)
-      //     this.resultsReceivedEvent.emit(results)
-
-
-      //   }, err => console.log("Error:", err))
-
-      // let recommedations_url = `http://127.0.0.1:8080/recommendations/${movies_json[0].movieId}`;
-      // await this.http.get(recommedations_url, { responseType: 'text' })
-      //   .subscribe(data => {
-
-      //   })
-
-
     }
 
     function renderResults(movies: []) {
