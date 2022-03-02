@@ -3,7 +3,7 @@ import { ThrowStmt } from '@angular/compiler';
 import { Component, OnInit, Output, EventEmitter, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { mock_results } from '../results-list/result.model';
 import { Result } from '../results-list/result.model';
-import { debounceTime, distinctUntilChanged, lastValueFrom, of, Subject, switchMap, map, fromEvent, tap } from 'rxjs';
+import { debounceTime, distinctUntilChanged, fromEvent } from 'rxjs';
 
 @Component({
   selector: 'app-query',
@@ -84,8 +84,5 @@ export class QueryComponent implements AfterViewInit {
       }
       return results
     }
-    //API call GET /results_from_query
-
-    //push received results onto results-list 
   }
 }

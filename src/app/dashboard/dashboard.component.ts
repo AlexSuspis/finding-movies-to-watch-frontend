@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Result } from './results-list/result.model';
+import { Result, mock_results } from './results-list/result.model';
 
 @Component({
   selector: 'app-dashboard',
@@ -7,9 +7,9 @@ import { Result } from './results-list/result.model';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-  queryResults: Result[] = [];
+  queryResults: Result[] = mock_results; //CHANGE BACK TO [] AFTER
   recommendationResults: Result[] = [];
-  renderRecommendations = true;
+  renderRecommendations = false;
   noQueryResults = false;
 
   constructor() { }
