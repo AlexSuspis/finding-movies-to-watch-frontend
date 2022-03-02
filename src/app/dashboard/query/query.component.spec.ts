@@ -31,13 +31,23 @@ describe('QueryComponent', () => {
 
   });
 
-  describe('When a non-empty set of results is received from /GET results', () => {
+  describe('When a non-empty set of results is received from GET /matches/:query', () => {
     it('should delete all results currently stored in the results list in results-list component', () => { });
     it('should push the received query results onto a results list in results-list component', () => { });
     it('should then call GET /recommendations/:movieId', () => { })
   });
 
-  describe('When an empty set of results is received from /GET matches/:query', () => {
-    it('display "Query not found" message in results-list component', () => { })
+  describe('When an empty set of results is received from GET /matches/:query', () => {
+    it('should display "Query not found" message in results-list component', () => { })
+  })
+
+  describe('When a non-empty set of results is received from GET /recommendations/:movieId', () => {
+    it('should delete all results currently stored in the results list in results-list component', () => { });
+    it('should push the received query results onto a results list in results-list component', () => { });
+    it('should then call GET /recommendations/:movieId', () => { })
+  });
+
+  describe('When an empty set of results is received from GET /recommendations/:movieId', () => {
+    it('should display "No recommendations available" message in results-list component', () => { })
   })
 });
