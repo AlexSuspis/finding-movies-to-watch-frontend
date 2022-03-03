@@ -7,7 +7,8 @@ import { Result, mock_results } from './results-list/result.model';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-  queryResults: Result[] = mock_results; //CHANGE BACK TO [] AFTER
+  queryResults: Result[] = []
+  // queryResults: Result[] = mock_results; //CHANGE BACK TO [] AFTER
   recommendationResults: Result[] = [];
   renderRecommendations = false;
   noQueryResults = false;
