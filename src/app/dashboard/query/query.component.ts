@@ -29,7 +29,6 @@ export class QueryComponent implements AfterViewInit {
       ).subscribe((event: any) => this.onInputChange(event))
   }
 
-
   constructor(private http: HttpClient) { }
 
   ngOnInit(): void { }
@@ -56,6 +55,7 @@ export class QueryComponent implements AfterViewInit {
 
             results.push(...renderResults(movies));
             this.resultsReceivedEvent.emit(results)
+            console.log('Results received event emitted!')
             this.recommendationsReceivedEvent.emit([])
 
             let movieId_for_recommendation: Number = movies[0].movieId;
@@ -66,10 +66,10 @@ export class QueryComponent implements AfterViewInit {
                 console.log(movies)
                 recommendations.push(...renderResults(movies));
                 this.recommendationsReceivedEvent.emit(recommendations)
+                console.log('Recommendations received event emitted!')
               });
           })
 
-        console.log('Resulst received event emitted!')
       } catch (err) {
         console.log("error!: ", err)
       }
