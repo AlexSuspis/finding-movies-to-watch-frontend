@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-view-preferences',
@@ -9,6 +9,8 @@ export class ViewPreferencesComponent implements OnInit {
   @Input() countries: String[] = [];
   @Input() providers: String[] = [];
 
+  @Output() toggleResultsWithProperty = new EventEmitter();
+
   constructor() { }
 
   ngOnInit(): void {
@@ -18,4 +20,13 @@ export class ViewPreferencesComponent implements OnInit {
     console.log('Hello World')
   }
 
+  stopPropagation(event: any) {
+    event.stopPropagation()
+  }
+
+  //on toggling checkbox
+  change(propertyLabel: any, $event: any) {
+    console.log(propertyLabel);
+    this.toggleResultsWithProperty.emit(propertyLabel);
+  }
 }

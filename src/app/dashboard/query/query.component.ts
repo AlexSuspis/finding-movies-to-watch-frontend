@@ -59,12 +59,19 @@ export class QueryComponent implements AfterViewInit {
             this.recommendationsReceivedEvent.emit([])
 
             let movieId_for_recommendation: Number = movies[0].movieId;
-            let recommendations_url = `http://127.0.0.1:8080/recommendations/${movieId_for_recommendation}`;
+            let movieIds = movies.map((movie: any) => movie.movieId)
+            console.log(movieIds)
+
+            let recommendations_url = `http://127.0.0.1:8080/recommendations/${JSON.stringify(movieIds)}`;
+            // let recommendations_url = `http://127.0.0.1:8080/recommendations/${movieId_for_recommendation}/${movies.length}`;
+
             this.http.get(recommendations_url, { responseType: 'text' })
               .subscribe(moviesJSON => {
                 let movies = JSON.parse(moviesJSON)
                 console.log(movies)
                 recommendations.push(...renderResults(movies));
+                console.log('recommendations')
+                console.log(recommendations)
                 this.recommendationsReceivedEvent.emit(recommendations)
                 console.log('Recommendations received event emitted!')
               });
