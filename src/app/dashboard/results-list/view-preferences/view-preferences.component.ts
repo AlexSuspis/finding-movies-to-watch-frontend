@@ -25,8 +25,11 @@ export class ViewPreferencesComponent implements OnInit {
   }
 
   //on toggling checkbox
-  change(propertyLabel: any, $event: any) {
-    console.log(propertyLabel);
-    this.toggleResultsWithProperty.emit(propertyLabel);
+  change(key: any, propertyLabel: any, $event: any) {
+    // console.log(propertyLabel);
+    // console.log($event)
+    $event.property = propertyLabel
+    $event.key = key;
+    this.toggleResultsWithProperty.emit($event);
   }
 }

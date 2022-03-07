@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Result } from './result.model';
 
 @Component({
@@ -9,6 +9,8 @@ import { Result } from './result.model';
 export class ResultsListComponent implements OnInit {
   @Input() results: Result[] = [];
   hiddenResults: Result[] = [];
+
+  @Output() removeElementWithIndex = new EventEmitter<Number>();
 
   constructor() { }
 
@@ -30,28 +32,48 @@ export class ResultsListComponent implements OnInit {
     return Array.from(setOfProviders);
   }
 
-  onToggleResultsWithValue(property: any) {
+  onToggleResultsWithValue($event: any) {
     console.log("in onToggleResultsWithValue() !!!!")
-    for (let result of this.results) {
-      for (let [key, value] of Object.entries(result)) {
+    let { property, key } = $event;
+    let checked = $event.originalTarget.checked;
+    console.log(key, property, checked)
+
+    let indicesToRemove: number[] = [];
+    this.results.forEach(result => {
+      //key,value
+      //countries: ['UK', 'US']
+      let indexToRemove: number = this.results.indexOf(result)
+      Object.entries(result).forEach(([key, value]) => {
         if (value.includes(property)) {
-          console.log("Result " + result['name'] + " has property " + property);
-          this.hiddenResults.push(result);
-          this.results.shift();
+          // console.log(this.results)
+          indicesToRemove.push(indexToRemove);
+          console.log(result['name'], indexToRemove)
+          // this.hiddenResults.push(result);
+          // console.log(this.results)
+          console.log(result['name'], indexToRemove)
+          console.log(this.results)
         }
-      }
-      // Object.keys(result).forEach((property) => {
-      //   if (result.property.includes(value)) {
-      //     console.log(result + " has value " + value);
-      //   }
+      })
+      // this.results.splice(indexToRemove, 1)
+    })
+    this.results = this.results.filter(result => indicesToRemove.includes(this.results.indexOf(result)));
+    // console.log(indicesToRemove)
+    // for (let i = 0; i < indicesToRemove.length; i++) {
+    //   this.results.splice(i, 1)
+    // }
+    // console.log(this.results)
 
-      // for (let property in result) {
-      //   if (property.includes(value)) {
-      //     console.log(result + " has value " + value);
-      //   }
-      // }
-    }
+    // this.results.forEach(result => {
+    //   //check if property value is in key
+    //   if (result[key as keyof typeof Array].includes(property) {
+    //     console.log(result['name'] + " has property " + property)
+    //   }
+    // })
+
+    //if checkbox is not checked (it was unchecked)
+    //we want to add stuff back
+
+
+    // console.log(property)
   }
-
-
 }

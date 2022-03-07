@@ -13,25 +13,35 @@ export class DashboardComponent implements OnInit {
   renderRecommendations = false;
   noQueryResults = false;
 
+  results: Result[] = mock_results;
+
   constructor() { }
 
   ngOnInit(): void {
   }
 
-  onRecommendationsReceived(results: Result[]) {
-    this.recommendationResults = results
+  onRecommendationsReceived(newResults: Result[]) {
+    this.results.push(...newResults)
+    // this.recommendationResults = results
   }
   onResultsReceived(results: Result[]) {
     this.renderRecommendations = false;
     if (results.length == 0) {
-      this.queryResults = [];
+      this.results = [];
+      // this.queryResults = [];
     } else
       // console.log(results)
-      this.queryResults = results
+      this.results = results
+    // this.queryResults = results
   }
 
   onInputEmptied() {
     this.renderRecommendations = true;
     console.log('renderRecommendations set to true');
+  }
+
+  removeElementWithIndex(index: any) {
+    console.log(index)
+    this.results.splice(index);
   }
 }

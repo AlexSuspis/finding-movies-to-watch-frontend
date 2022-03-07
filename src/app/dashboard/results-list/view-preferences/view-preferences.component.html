@@ -12,8 +12,8 @@
                     <!-- <div class="container"> -->
                     <div class="dropdown-item">
                         <div class="form-check">
-                            <input class="form-check-input" (change)="change(country, $event)" type="checkbox" value=""
-                                id="countryCheck{{i}}">
+                            <input class="form-check-input" (change)="change('countries', country, $event)"
+                                type="checkbox" value="" id="countryCheck{{i}}">
                             <label class="form-check-label h-100 w-100" for="countryCheck{{i}}">
                                 {{country}}
                             </label>
