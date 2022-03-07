@@ -8,12 +8,17 @@ import { Result } from './result.model';
 })
 export class ResultsListComponent implements OnInit {
   @Input() results: Result[] = [];
+  @Input() displayedResults: Result[] = [];
+
   hiddenResults: Result[] = [];
+  countries: string[] = [];
+  providers: string[] = [];
 
   @Output() removeElementWithIndex = new EventEmitter<Number>();
 
-  constructor() { }
-
+  constructor() {
+    this.displayedResults = this.results
+  }
   ngOnInit(): void {
   }
 
@@ -32,48 +37,34 @@ export class ResultsListComponent implements OnInit {
     return Array.from(setOfProviders);
   }
 
-  onToggleResultsWithValue($event: any) {
+  filterResults($event: any) {
+
     console.log("in onToggleResultsWithValue() !!!!")
     let { property, key } = $event;
-    let checked = $event.originalTarget.checked;
-    console.log(key, property, checked)
+    console.log(property)
+    if (property === 'reset') {
+      console.log("Property is 'reset'")
+      this.displayedResults = this.results;
+      return
+    }
 
-    let indicesToRemove: number[] = [];
+    let indicesToRemain: number[] = [];
     this.results.forEach(result => {
       //key,value
       //countries: ['UK', 'US']
       let indexToRemove: number = this.results.indexOf(result)
       Object.entries(result).forEach(([key, value]) => {
         if (value.includes(property)) {
-          // console.log(this.results)
-          indicesToRemove.push(indexToRemove);
+          indicesToRemain.push(indexToRemove);
           console.log(result['name'], indexToRemove)
           // this.hiddenResults.push(result);
-          // console.log(this.results)
-          console.log(result['name'], indexToRemove)
-          console.log(this.results)
         }
       })
-      // this.results.splice(indexToRemove, 1)
     })
-    this.results = this.results.filter(result => indicesToRemove.includes(this.results.indexOf(result)));
-    // console.log(indicesToRemove)
-    // for (let i = 0; i < indicesToRemove.length; i++) {
-    //   this.results.splice(i, 1)
-    // }
-    // console.log(this.results)
 
-    // this.results.forEach(result => {
-    //   //check if property value is in key
-    //   if (result[key as keyof typeof Array].includes(property) {
-    //     console.log(result['name'] + " has property " + property)
-    //   }
-    // })
-
-    //if checkbox is not checked (it was unchecked)
-    //we want to add stuff back
-
-
-    // console.log(property)
+    // if (this.displayedResults.length == this.results.length) {
+    this.displayedResults = this.results.filter(result => indicesToRemain.includes(this.results.indexOf(result)));
+    // } else
+    //   this.displayedResults = this.displayedResults.filter(result => indicesToRemain.includes(this.displayedResults.indexOf(result)));
   }
 }

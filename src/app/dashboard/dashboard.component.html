@@ -19,7 +19,8 @@
             Recommendations
         </div>
         <ng-template #showResults>
-            <app-results-list [results]="results" (removeElementWithIndex)="removeElementWithIndex($event)">
+            <app-results-list [results]="results" [displayedResults]="results"
+                (removeElementWithIndex)="removeElementWithIndex($event)">
             </app-results-list>
 
         </ng-template>

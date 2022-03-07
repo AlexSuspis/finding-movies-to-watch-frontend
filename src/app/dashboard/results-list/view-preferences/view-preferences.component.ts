@@ -1,4 +1,5 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-view-preferences',
@@ -9,15 +10,26 @@ export class ViewPreferencesComponent implements OnInit {
   @Input() countries: String[] = [];
   @Input() providers: String[] = [];
 
-  @Output() toggleResultsWithProperty = new EventEmitter();
+  @Output() filterResultsEvent = new EventEmitter();
+  isFilterActive: boolean = false;
 
   constructor() { }
 
   ngOnInit(): void {
   }
 
-  onClick() {
-    console.log('Hello World')
+  onClick(propertyLabel: any, $event: any) {
+    console.log(propertyLabel)
+    if (propertyLabel == 'reset') {
+      this.isFilterActive = false;
+      $event.property = propertyLabel;
+    }
+    else {
+      this.isFilterActive = true;
+      $event.property = propertyLabel;
+      console.log($event)
+    }
+    this.filterResultsEvent.emit($event);
   }
 
   stopPropagation(event: any) {
@@ -30,6 +42,6 @@ export class ViewPreferencesComponent implements OnInit {
     // console.log($event)
     $event.property = propertyLabel
     $event.key = key;
-    this.toggleResultsWithProperty.emit($event);
+    this.filterResultsEvent.emit($event);
   }
 }

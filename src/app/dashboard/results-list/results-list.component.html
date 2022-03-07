@@ -1,9 +1,11 @@
 <div *ngIf="results.length != 0; else noResults">
     <!-- <div> -->
-    <app-view-preferences (toggleResultsWithProperty)="onToggleResultsWithValue($event)"
-        [countries]="getSetOfCountries()" [providers]="getSetOfProviders()"></app-view-preferences>
+    <app-view-preferences (filterResultsEvent)="filterResults($event)" [countries]="getSetOfCountries()"
+        [providers]="getSetOfProviders()">
+    </app-view-preferences>
+    <!-- <app-view-preferences (toggleResultsWithProperty)="onToggleResultsWithValue($event)"></app-view-preferences> -->
     <div class="row bg-danger">
-        <div class="col-12 col-sm-6 col-md-4 col-lg-3 pb-2 bg-info" *ngFor="let result of results">
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3 pb-2 bg-info" *ngFor="let result of displayedResults">
             <div class="card card-body h-100">
                 <div> <b>{{result['name']}}</b></div>
                 <!-- <div class="card card-footer"> -->
