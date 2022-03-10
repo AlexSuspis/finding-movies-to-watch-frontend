@@ -86,7 +86,7 @@ export class QueryComponent implements AfterViewInit {
       let results: Result[] = [];
       console.log(movies)
       for (let movie of movies) {
-        let result = new Result(movie['title'], movie['countries'], 'Test Description', movie['providers'], movie['country_flag_urls']);
+        let result = new Result(movie['title'], movie['countries'], 'Test Description', movie['providers'], movie['country_flag_urls'], movie['provider_icon_urls']);
         results.push(result)
       }
       return results

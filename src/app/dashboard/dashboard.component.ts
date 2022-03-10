@@ -13,7 +13,8 @@ export class DashboardComponent implements OnInit {
   renderRecommendations = false;
   noQueryResults = false;
 
-  results: Result[] = mock_results;
+  results: Result[] = [];
+  // results: Result[] = mock_results;
 
   constructor() { }
 
