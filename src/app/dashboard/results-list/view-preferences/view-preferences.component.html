@@ -1,39 +1,35 @@
 <div class="row pb-3">
-    <div class="col-8">
-        <div class="row">
-            <div class="col bg-danger">
-                <div class="dropdown mb-2">
-                    <button class="btn btn-light dropdown-toggle border" type="button" id="dropdownMenuButton1"
-                        data-bs-toggle="dropdown" aria-expanded="false">
-                        Countries
-                    </button>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                        <li *ngFor="let country of countries; let i = index">
-                            <a [ngClass]="activeLiNumber===i ? 'dropdown-item active' : 'dropdown-item'"
-                                (click)="onClick(country, $event, i)">{{country}}</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="col bg-secondary">
-                <div class="dropdown mb-2">
-                    <button class="btn btn-light dropdown-toggle border" type="button" id="dropdownMenuButton1"
-                        data-bs-toggle="dropdown" aria-expanded="false">
-                        Providers
-                    </button>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                        <li *ngFor="let provider of providers; let i = index">
-                            <a [ngClass]="activeLiNumber===i+countries.length ? 'dropdown-item active' : 'dropdown-item'"
-                                (click)="onClick(provider, $event, i+countries.length)">{{provider}}</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
+    <div class="col-3" style="width: auto">
+        <div class="dropdown mb-2">
+            <button class="btn btn-light dropdown-toggle border" type="button" id="dropdownMenuButton1"
+                data-bs-toggle="dropdown" aria-expanded="false">
+                Countries
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                <li *ngFor="let country of countries; let i = index">
+                    <a [ngClass]="activeLiNumber===i ? 'dropdown-item active' : 'dropdown-item'"
+                        (click)="onClick(country, $event, i)">{{country}}</a>
+                </li>
+            </ul>
         </div>
     </div>
-    <!-- <div class="col ml-auto"> -->
-    <div class="col align-self-end bg-info">
-        <div *ngIf="isFilterActive" class="btn btn-dark border" type="button" (click)="onClick('reset', $event, -1)">
+    <div class="col-3" style="width: auto">
+        <div class="dropdown mb-2">
+            <button class="btn btn-light dropdown-toggle border" type="button" id="dropdownMenuButton1"
+                data-bs-toggle="dropdown" aria-expanded="false">
+                Providers
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                <li *ngFor="let provider of providers; let i = index">
+                    <a [ngClass]="activeLiNumber===i+countries.length ? 'dropdown-item active' : 'dropdown-item'"
+                        (click)="onClick(provider, $event, i+countries.length)">{{provider}}</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="col ml-auto">
+        <div *ngIf="isFilterActive" class="btn btn-secondary border" type="button"
+            (click)="onClick('reset', $event, -1)">
             Reset
             Filter</div>
     </div>
