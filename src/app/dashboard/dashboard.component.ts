@@ -7,14 +7,12 @@ import { Result, mock_results } from './results-list/result.model';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-  // queryResults: Result[] = []
-  queryResults: Result[] = mock_results; //CHANGE BACK TO [] AFTER
   recommendationResults: Result[] = [];
   renderRecommendations = false;
   noQueryResults = false;
 
-  results: Result[] = [];
-  // results: Result[] = mock_results;
+  // results: Result[] = [];
+  results: Result[] = mock_results;
 
   constructor() { }
 
@@ -42,7 +40,7 @@ export class DashboardComponent implements OnInit {
   }
 
   removeElementWithIndex(index: any) {
-    console.log(index)
+    // console.log(index)
     this.results.splice(index);
   }
 }

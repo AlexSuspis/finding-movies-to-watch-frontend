@@ -1,7 +1,7 @@
 <div class="row pb-3">
     <div class="col-8">
         <div class="row">
-            <div class="col">
+            <div class="col bg-danger">
                 <div class="dropdown mb-2">
                     <button class="btn btn-light dropdown-toggle border" type="button" id="dropdownMenuButton1"
                         data-bs-toggle="dropdown" aria-expanded="false">
@@ -11,20 +11,11 @@
                         <li *ngFor="let country of countries; let i = index">
                             <a [ngClass]="activeLiNumber===i ? 'dropdown-item active' : 'dropdown-item'"
                                 (click)="onClick(country, $event, i)">{{country}}</a>
-                            <!-- <div class="dropdown-item">
-                                <div class="form-check">
-                                    <input class="form-check-input" (change)="change('countries', country, $event)"
-                                        type="checkbox" value="" id="countryCheck{{i}}">
-                                    <label class="form-check-label h-100 w-100" for="countryCheck{{i}}">
-                                        {{country}}
-                                    </label>
-                                </div>
-                            </div> -->
                         </li>
                     </ul>
                 </div>
             </div>
-            <div class="col">
+            <div class="col bg-secondary">
                 <div class="dropdown mb-2">
                     <button class="btn btn-light dropdown-toggle border" type="button" id="dropdownMenuButton1"
                         data-bs-toggle="dropdown" aria-expanded="false">
@@ -40,7 +31,8 @@
             </div>
         </div>
     </div>
-    <div class="col ml-auto">
+    <!-- <div class="col ml-auto"> -->
+    <div class="col align-self-end bg-info">
         <div *ngIf="isFilterActive" class="btn btn-dark border" type="button" (click)="onClick('reset', $event, -1)">
             Reset
             Filter</div>

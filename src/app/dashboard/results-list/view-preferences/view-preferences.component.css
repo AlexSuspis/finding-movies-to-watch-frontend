@@ -1,7 +1,3 @@
-/* .active{
-    background: none;
-    background-color: none;
-} */
 ul :active{
     background-color: grey !important;
 }
