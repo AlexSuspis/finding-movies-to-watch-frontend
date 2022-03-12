@@ -41,9 +41,9 @@ export class ResultsListComponent implements OnInit {
 
     console.log("in onToggleResultsWithValue() !!!!")
     let { property, key } = $event;
-    console.log(property)
+    // console.log(property)
     if (property === 'reset') {
-      console.log("Property is 'reset'")
+      // console.log("Property is 'reset'")
       this.displayedResults = this.results;
       return
     }
@@ -56,7 +56,7 @@ export class ResultsListComponent implements OnInit {
       Object.entries(result).forEach(([key, value]) => {
         if (value.includes(property)) {
           indicesToRemain.push(indexToRemove);
-          console.log(result['name'], indexToRemove)
+          // console.log(result['name'], indexToRemove)
           // this.hiddenResults.push(result);
         }
       })
