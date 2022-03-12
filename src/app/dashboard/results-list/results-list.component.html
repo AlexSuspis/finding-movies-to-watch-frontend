@@ -4,12 +4,13 @@
         [providers]="getSetOfProviders()">
     </app-view-preferences>
     <!-- <app-view-preferences (toggleResultsWithProperty)="onToggleResultsWithValue($event)"></app-view-preferences> -->
-    <div class="row bg-danger">
-        <div class="col-12 col-sm-6 col-md-4 col-lg-3 pb-2 bg-info" *ngFor="let result of displayedResults">
+    <div class="row">
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3 pb-3" *ngFor="let result of displayedResults">
             <div class="card card-body h-100">
-                <div> <b>{{result['name']}}</b></div>
+                <!-- <div> <b>{{result['name']}}</b></div> -->
+                <div>{{result['name']}}</div>
 
-                <div class="row ">
+                <div class="row">
                     <div class="col-12">
                         <img *ngFor="let url of result['country_flag_urls']; let i=index" src="{{url}}" alt=""
                             width="20" title="{{result['countries'][i]}}" height="16" style="margin: 1px 1px">

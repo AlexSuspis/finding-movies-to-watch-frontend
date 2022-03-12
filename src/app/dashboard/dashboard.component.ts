@@ -38,7 +38,7 @@ export class DashboardComponent implements OnInit {
 
   onInputEmptied() {
     this.renderRecommendations = true;
-    console.log('renderRecommendations set to true');
+    // console.log('renderRecommendations set to true');
   }
 
   removeElementWithIndex(index: any) {
