@@ -8,11 +8,10 @@ import { Result, mock_results } from './results-list/result.model';
 })
 export class DashboardComponent implements OnInit {
   recommendationResults: Result[] = [];
-  renderRecommendations = false;
-  noQueryResults = false;
+  noResults = false;
 
-  // results: Result[] = [];
-  results: Result[] = mock_results;
+  results: Result[] = [];
+  // results: Result[] = mock_results;
 
   constructor() { }
 
@@ -24,7 +23,7 @@ export class DashboardComponent implements OnInit {
     // this.recommendationResults = results
   }
   onResultsReceived(results: Result[]) {
-    this.renderRecommendations = false;
+    this.noResults = false;
     if (results.length == 0) {
       this.results = [];
       // this.queryResults = [];
@@ -35,7 +34,7 @@ export class DashboardComponent implements OnInit {
   }
 
   onInputEmptied() {
-    this.renderRecommendations = true;
+    this.noResults = true;
     // console.log('renderRecommendations set to true');
   }
 

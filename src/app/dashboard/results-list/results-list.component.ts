@@ -39,7 +39,6 @@ export class ResultsListComponent implements OnInit {
 
   filterResults($event: any) {
 
-    console.log("in onToggleResultsWithValue() !!!!")
     let { property, key } = $event;
     // console.log(property)
     if (property === 'reset') {

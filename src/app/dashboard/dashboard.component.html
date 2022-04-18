@@ -15,8 +15,8 @@
     </div>
     <div class="row mt-3 pt-2">
         <!-- <div class="col-xs-6"> -->
-        <div *ngIf="renderRecommendations; else showResults">
-            Recommendations
+        <div *ngIf="noResults; else showResults">
+            No results to show
         </div>
         <ng-template #showResults>
             <app-results-list [results]="results" [displayedResults]="results"

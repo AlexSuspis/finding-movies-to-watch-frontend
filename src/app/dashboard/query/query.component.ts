@@ -50,34 +50,40 @@ export class QueryComponent implements AfterViewInit {
         console.log("Sending query " + query + " to: " + query_matching_url)
 
         this.http.get(query_matching_url, { responseType: 'text' })
-          .subscribe(moviesJSON => {
-            let movies = JSON.parse(moviesJSON)
-            // console.log(movies)
+          .subscribe(
+            moviesJSON => {
+              let movies = JSON.parse(moviesJSON)
+              // console.log(movies)
 
-            results.push(...renderResults(movies));
-            this.resultsReceivedEvent.emit(results)
-            // console.log('Results received event emitted!')
-            this.recommendationsReceivedEvent.emit([])
+              results.push(...renderResults(movies));
+              this.resultsReceivedEvent.emit(results)
+              // console.log('Results received event emitted!')
+              this.recommendationsReceivedEvent.emit([])
 
-            let movieIds = movies.map((movie: any) => movie.movieId)
-            // console.log(movieIds)
+              let movieIds = movies.map((movie: any) => movie.movieId)
+              // console.log(movieIds)
 
-            let recommendations_url = `http://127.0.0.1:8080/recommendations/${JSON.stringify(movieIds)}`;
-            // let recommendations_url = `http://127.0.0.1:8080/recommendations/${movieId_for_recommendation}/${movies.length}`;
+              let recommendations_url = `http://127.0.0.1:8080/recommendations/${JSON.stringify(movieIds)}`;
+              // let recommendations_url = `http://127.0.0.1:8080/recommendations/${movieId_for_recommendation}/${movies.length}`;
 
-            this.http.get(recommendations_url, { responseType: 'text' })
-              .subscribe(moviesJSON => {
-                let movies = JSON.parse(moviesJSON)
-                // console.log(movies)
-                recommendations.push(...renderResults(movies));
-                // console.log('recommendations')
-                // console.log(recommendations)
-                this.recommendationsReceivedEvent.emit(recommendations)
-                // console.log('Recommendations received event emitted!')
-              });
-          })
+              this.http.get(recommendations_url, { responseType: 'text' })
+                .subscribe(moviesJSON => {
+                  let movies = JSON.parse(moviesJSON)
+                  // console.log(movies)
+                  recommendations.push(...renderResults(movies));
+                  // console.log('recommendations')
+                  // console.log(recommendations)
+                  this.recommendationsReceivedEvent.emit(recommendations)
+                  // console.log('Recommendations received event emitted!')
+                });
+            },
+            error => {
+              this.inputEmptiedEvent.emit();
+              console.log("error!: ", error)
+            })
 
       } catch (err) {
+        this.inputEmptiedEvent.emit();
         console.log("error!: ", err)
       }
     }
