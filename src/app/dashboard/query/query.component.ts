@@ -4,6 +4,7 @@ import { Component, OnInit, Output, EventEmitter, ViewChild, ElementRef, AfterVi
 import { mock_results } from '../results-list/result.model';
 import { Result } from '../results-list/result.model';
 import { debounceTime, distinctUntilChanged, fromEvent } from 'rxjs';
+import { environment } from 'environments/environment';
 
 @Component({
   selector: 'app-query',
@@ -18,6 +19,8 @@ export class QueryComponent implements AfterViewInit {
 
   @ViewChild('search') input!: ElementRef;
 
+  apiURL;
+
   //Inspired from:
   //https://fireflysemantics.medium.com/debouncing-your-angular-search-field-ce6686cf54b3
   //https://medium.com/aviabird/angular-2-the-new-craze-of-observables-operators-e2b9dcb9330a
@@ -29,7 +32,9 @@ export class QueryComponent implements AfterViewInit {
       ).subscribe((event: any) => this.onInputChange(event))
   }
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    this.apiURL = environment.apiURL;
+  }
 
   ngOnInit(): void { }
 
@@ -46,7 +51,7 @@ export class QueryComponent implements AfterViewInit {
       let results: Result[] = [];
 
       try {
-        let query_matching_url = `http://127.0.0.1:8080/matches/${event.target.value}`;
+        let query_matching_url = this.apiURL + `/matches/${event.target.value}`;
         console.log("Sending query " + query + " to: " + query_matching_url)
 
         this.http.get(query_matching_url, { responseType: 'text' })
@@ -63,7 +68,7 @@ export class QueryComponent implements AfterViewInit {
               let movieIds = movies.map((movie: any) => movie.movieId)
               // console.log(movieIds)
 
-              let recommendations_url = `http://127.0.0.1:8080/recommendations/${JSON.stringify(movieIds)}`;
+              let recommendations_url = this.apiURL + `/recommendations/${JSON.stringify(movieIds)}`;
               // let recommendations_url = `http://127.0.0.1:8080/recommendations/${movieId_for_recommendation}/${movies.length}`;
 
               this.http.get(recommendations_url, { responseType: 'text' })
