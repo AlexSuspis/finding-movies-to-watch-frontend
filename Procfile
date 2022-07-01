@@ -1,1 +1,1 @@
-web: ng serve --configuration=production
+web: ng build -- prod
