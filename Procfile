@@ -1,0 +1,1 @@
+web: ng serve --configuration=production
