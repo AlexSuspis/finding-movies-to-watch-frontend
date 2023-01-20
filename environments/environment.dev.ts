@@ -4,6 +4,6 @@ export const environment = {
 
     title: 'Dev Environment',
 
-    apiURL: 'http://127.0.0.1:8080/'
+    apiURL: 'http://127.0.0.1:8080'
 
 };

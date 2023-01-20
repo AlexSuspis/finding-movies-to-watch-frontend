@@ -4,6 +4,9 @@ export const environment = {
 
     title: 'Local Environment Heading',
 
-    apiURL: 'http://localhost:8000'
+    //for local dev
+    // apiURL: 'http://localhost:8000'
+    //for Docker containers
+    apiURL: "http://backend:8080"
 
 };
